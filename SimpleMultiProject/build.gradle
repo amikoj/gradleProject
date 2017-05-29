@@ -1,0 +1,19 @@
+
+//配置所有工程共有配置模块.
+allprojects {
+ //添加java 插件
+ apply plugin: 'java'
+ 
+
+ //配置依赖位置 
+ repositories {
+    mavenCentral()
+ }
+
+
+ //配置共有依赖
+ dependencies {
+  testCompile 'junit:junit:4.11'
+ }
+   
+}

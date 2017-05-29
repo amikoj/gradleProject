@@ -1,0 +1,10 @@
+
+version '2.0.1'                   //jar版本号
+jar{
+  manifest{
+    attributes 'Main-Class':'www.enjoytoday.cn.GradleTwoClass'   //jar的mainfest配置
+  }
+
+
+}
+

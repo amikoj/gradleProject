@@ -1,0 +1,8 @@
+version '1.0.2'         //编译生成的jar的版本号
+
+jar{
+  manifest{
+    attributes 'Main-Class':'cn.enjoytoday.BeginGradle'   //设置jar主程序入口
+  }
+}
+
