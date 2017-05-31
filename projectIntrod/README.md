@@ -6,7 +6,7 @@
 gradle示例源码:[GitHub](https://github.com/fishly/gradleProject/tree/master/projectIntrod)
 
 
-## 基本概念
+## project
 
 gradle默认以build.gradle脚本为识别一个gradle工程的参考(build.gradle是默认构建脚本，我们也可以指定脚本名称)，
 而gradle构建脚本与Project为一对一的关系,也可以理解:一个gradle构建脚本本身就是一个Project对象,我们也可以通过官方
@@ -33,8 +33,28 @@ gradle默认以build.gradle脚本为识别一个gradle工程的参考(build.grad
 所有的子工程(子工程根据检索其构架脚本build.gradle进行导入)；3）子工程依赖于该project的配置.在开始下面的话题前，先介绍一个查看
 当前工程的目录结构(主工程以及子工程的工程结构)的命令,命令如下:
 
+```
+hfcai@ubuntu:~$ gradle projects
+:projects
+
+------------------------------------------------------------
+Root project
+------------------------------------------------------------
+
+Root project 'gradleProject'
++--- Project ':SimpleMultiProject'
++--- Project ':gradleWrapperProject'
+\--- Project ':projectIntrod'
+
+To see a list of the tasks of a project, run gradle <project-path>:tasks
+For example, try running gradle :SimpleMultiProject:tasks
+
+BUILD SUCCESSFUL
+```
 
 
+### project参数配置
+project在运行task之前会先配置一些基本的project属性,如gradle文件名、project名称、路径等信息,project 提供两个方法
+以供我们运行一些特定的代码块,project.
 
-
-                       
+                      

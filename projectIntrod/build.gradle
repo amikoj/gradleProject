@@ -1,3 +1,90 @@
+/**
+ * gradle 工程基本属性配置完成后回调
+ */
+this.project.afterEvaluate (new Action<Project>() {
+    @Override
+    void execute(Project project) {
+            println "this project evaluate over,and project name is:"+name
+
+        project.getSubprojects().each { sub ->
+
+            println "this project path is： "+sub.path
+        }
+
+        /**
+         * 当前工程中的所有任务
+         */
+        tasks.eachWithIndex{ Task entry, int i ->
+
+            println "task index is:"+i+",and task name is :"+entry.getName()
+
+        }
+    }
+})
 
 
-this.allprojects
+task before <<{
+    println("evaluate before.")
+}
+
+/**
+ * 另外一种写法.
+ */
+this.project.beforeEvaluate  {
+
+    project.copy(new Action<CopySpec>() {
+        @Override
+        void execute(CopySpec copySpec) {
+            from configurations.runtime
+            into 'build/deploy/lib'
+
+        }
+    })
+
+    println("this project evaluate has not begin.")
+        name ="run already."
+
+}
+
+
+//配置构建脚本的类路径,需要gradle本身以外的插件资源等,需要配置插件的classpath
+buildscript{
+    repositories{
+        jcenter()
+
+    }
+    dependencies{
+        classpath  'com.android.tools.build:gradle:1.5.0'
+    }
+
+}
+
+
+//当前所有工程中的配置包括子project和当前主工程的配置
+allprojects{
+    repositories{
+        mavenCentral()
+    }
+
+    dependencies{
+
+        //
+
+    }
+
+
+}
+
+
+//子工程中配置
+subprojects{
+
+
+}
+
+
+
+
+
+
+

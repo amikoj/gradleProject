@@ -1,0 +1,16 @@
+
+
+afterEvaluate(new Action<Project>() {
+    @Override
+    void execute(Project project) {
+
+        println "get this project."
+    }
+})
+
+
+task  TT << {
+
+
+    println "this is task TT."
+}
