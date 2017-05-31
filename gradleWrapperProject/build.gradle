@@ -9,7 +9,7 @@ task wrapper(type: Wrapper){
 //    distributionBase = PathBase.GRADLE_USER_HOME    //默认 ${HOME_DIR}/.gradle
 //    distributionPath = 'wrapper/dists'
 //    distributionType = DistributionType.BIN
-//    distributionUrl = "https\\://services.gradle.org/distributions/gradle-2.3-bin.zip"
+    distributionUrl = "https\\://services.gradle.org/distributions/gradle-2.3-bin.zip"
 //    gradleVersion = gradle.gradleVersion
 //    jarFile = 'gradle/wrapper/gradle-wrapper.jar'
 //    propertiesFile = "gradle/wrapper/gradle-wrapper.properties"

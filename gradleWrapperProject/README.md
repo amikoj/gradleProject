@@ -1,7 +1,8 @@
-##说明
+## 说明
+
 本工程是为了讲解gradle wrapper特性,使得gradle项目无需依赖系统gradle环境就可允许的功能
 
-###gradle wrapper  目录结构
+### gradle wrapper  目录结构
 
 - gradlew 自动配置gradle wrapper工程环境脚本(linux)
 - gradlew.bat 自动配置gradle wrapper工程环境脚本(window)
