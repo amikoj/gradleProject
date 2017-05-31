@@ -1,0 +1,37 @@
+
+
+
+task wrapper(type: Wrapper){
+    println("this is wrapper.")
+    gradleVersion = '2.2.3'
+//    archiveBase = PathBase.GRADLE_USER_HOME         //默认 ${HOME_DIR}/.gradle
+//    archivePath = 'wrapper/dists'
+//    distributionBase = PathBase.GRADLE_USER_HOME    //默认 ${HOME_DIR}/.gradle
+//    distributionPath = 'wrapper/dists'
+//    distributionType = DistributionType.BIN
+//    distributionUrl = "https\\://services.gradle.org/distributions/gradle-2.3-bin.zip"
+//    gradleVersion = gradle.gradleVersion
+//    jarFile = 'gradle/wrapper/gradle-wrapper.jar'
+//    propertiesFile = "gradle/wrapper/gradle-wrapper.properties"
+//    scriptFile = 'gradlew'
+}
+task("test"){
+    println("this is test task.")
+}
+
+task A{
+    tasks.class
+    println("this is A task.")
+}
+
+
+task C << {
+
+ println("this is task C")
+}
+
+
+
+task {
+    println("this is default task.")
+}
