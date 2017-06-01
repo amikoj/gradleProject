@@ -1,8 +1,6 @@
 
 //project 状态监听
 
-
-
 this.project.subprojects { sub ->
 
     if(sub.path.endsWith("test")){
@@ -11,9 +9,6 @@ this.project.subprojects { sub ->
         }
     }
 }
-
-
-
 this.project.getSubprojects().each { sub ->
 
     if(sub.path.endsWith("test")){
@@ -72,7 +67,7 @@ gradle.addProjectEvaluationListener(new ProjectEvaluationListener() {
     void afterEvaluate(Project project, ProjectState state) {
         println " add project evaluation lister afterProject,project path is: $project"
     }
-}
+  }
 
 )
 

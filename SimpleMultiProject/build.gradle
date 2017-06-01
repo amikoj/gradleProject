@@ -1,19 +1,33 @@
 
-//配置所有工程共有配置模块.
-allprojects {
- //添加java 插件
+subprojects{ sub ->
+
  apply plugin: 'java'
- 
 
- //配置依赖位置 
- repositories {
-    mavenCentral()
+ //配置共有仓库
+ repositories{
+   mavenCentral()
  }
-
 
  //配置共有依赖
  dependencies {
   testCompile 'junit:junit:4.11'
  }
-   
+
+
+//    task B << {
+//        println "this is the shared task of sub project."
+//    }
+
+
+  sub.afterEvaluate{
+        task B << {
+            println "this is the shared task of sub project."
+        }
+    }
+}
+
+
+
+task A << {
+  println "this is the unique task of main project."
 }
