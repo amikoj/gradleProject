@@ -1,3 +1,83 @@
+
+//project 状态监听
+
+
+
+this.project.subprojects { sub ->
+
+    if(sub.path.endsWith("test")){
+        sub.afterEvaluate {
+            println "Evaluate before of "+sub.path
+        }
+    }
+}
+
+
+
+this.project.getSubprojects().each { sub ->
+
+    if(sub.path.endsWith("test")){
+        sub.afterEvaluate(new Action<Project>() {
+            @Override
+            void execute(Project project) {
+                println "Evaluate before of "+sub.path
+            }
+        })
+
+    }
+}
+
+
+this.project.subprojects{ sub ->
+    if(sub.path.endsWith("test")){
+        sub.afterEvaluate { p ->
+            println "subprojects getAt Evaluate before of "+p.path
+
+        }
+
+    }
+}
+
+
+this.project.afterEvaluate{
+    println "this.project.afterEvaluate"
+
+}
+
+
+
+
+gradle.afterProject {project,projectState ->
+    if(projectState.failure){
+        println "Evaluation afterProject of $project FAILED"
+    } else {
+        println "Evaluation afterProject of $project succeeded"
+    }
+}
+
+
+
+gradle.beforeProject { project ->
+    println "Evaluation before of $project"
+
+}
+
+gradle.addProjectEvaluationListener(new ProjectEvaluationListener() {
+    @Override
+    void beforeEvaluate(Project project) {
+        println " add project evaluation lister beforeEvaluate,project path is: $project"
+    }
+
+    @Override
+    void afterEvaluate(Project project, ProjectState state) {
+        println " add project evaluation lister afterProject,project path is: $project"
+    }
+}
+
+)
+
+
+
 /**
  * gradle 工程基本属性配置完成后回调
  */
@@ -9,6 +89,12 @@ this.project.afterEvaluate (new Action<Project>() {
         project.getSubprojects().each { sub ->
 
             println "this project path is： "+sub.path
+
+            if (sub.path.endsWith("test")){
+                sub.beforeEvaluate{
+                    printf '${sub} before evaluate get.'
+                }
+            }
         }
 
         /**
@@ -19,32 +105,22 @@ this.project.afterEvaluate (new Action<Project>() {
             println "task index is:"+i+",and task name is :"+entry.getName()
 
         }
+
+
     }
 })
+
+
+
+
+
 
 
 task before <<{
     println("evaluate before.")
 }
 
-/**
- * 另外一种写法.
- */
-this.project.beforeEvaluate  {
 
-    project.copy(new Action<CopySpec>() {
-        @Override
-        void execute(CopySpec copySpec) {
-            from configurations.runtime
-            into 'build/deploy/lib'
-
-        }
-    })
-
-    println("this project evaluate has not begin.")
-        name ="run already."
-
-}
 
 
 //配置构建脚本的类路径,需要gradle本身以外的插件资源等,需要配置插件的classpath
@@ -63,7 +139,10 @@ buildscript{
 //当前所有工程中的配置包括子project和当前主工程的配置
 allprojects{
     repositories{
-        mavenCentral()
+       jcenter()
+//        ivy()
+
+
     }
 
     dependencies{
@@ -76,11 +155,7 @@ allprojects{
 }
 
 
-//子工程中配置
-subprojects{
 
-
-}
 
 
 

@@ -7,6 +7,6 @@
 # Location of the SDK. This is only used by Gradle.
 # For customization when using a Version Control System, please read the
 # header note.
-#Wed May 31 21:19:22 CST 2017
-ndk.dir=/opt/android/android-sdk-linux/ndk-bundle
-sdk.dir=/opt/android/android-sdk-linux
+#Thu Jun 01 09:42:18 CST 2017
+ndk.dir=/opt/android-sdk-linux/ndk-bundle
+sdk.dir=/opt/android-sdk-linux

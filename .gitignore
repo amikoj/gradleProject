@@ -27,4 +27,4 @@ gradle/
 */gradle/
 */.idea/
 */.gradle/
-
+local.properties

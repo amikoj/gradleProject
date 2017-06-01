@@ -1,0 +1,5 @@
+
+task A << {
+
+    println "this is task A"
+}

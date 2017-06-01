@@ -57,4 +57,142 @@ BUILD SUCCESSFUL
 project在运行task之前会先配置一些基本的project属性,如gradle文件名、project名称、路径等信息,project 提供两个方法
 以供我们运行一些特定的代码块,project.
 
-                      
+
+
+- project状态监听
+
+  gradle提供了对project状态配置监听的接口回调,以方便我们来配置一些Project的配置属性,监听主要分为两大类,一种是通过project进行 回调，一种是通过gradle进行回调,作用域也有不同
+  ,project是只针对当前project实现进行的监听,gradle监听是针对于所有的project而言的。接下来就其方式和具体的实现进行介绍说明。
+  
+  1) project回调
+  
+  Project api给我们提供了两个方法对当前project配置状态进行回调afterEvaluate(project开始配置前调用)和beforeEvaluate,afterEvaluate(project配置完成后回调)
+，需要注意的我们所说的添加的代码块回调可以添加多次，运行顺序按照添加的顺序执行(同样使用于下面所说的所有回调).
+
+  - beforeEvaluate
+    这个方法很迷惑人,他是确实存在与Project API调用中的,API方法调用参数有两类,如下所示:
+    
+    ```
+        /**
+         * Adds an action to execute immediately before this project is evaluated.
+         *
+         * @param action the action to execute.
+         */
+        void beforeEvaluate(Action<? super Project> action);
+        
+        
+            /**
+             * <p>Adds a closure to be called immediately before this project is evaluated. The project is passed to the closure
+             * as a parameter.</p>
+             *
+             * @param closure The closure to call.
+             */
+        void beforeEvaluate(Closure closure);
+
+
+    ```
+
+   方法说的很清楚是配置之前调用,但你要是直接当前build.gradle中使用是肯定不会调用到的,因为Project都没配置好还有他什么事情(也是无奈),这个代码块的添加只能放在
+   父工程的build.gradle中,如此才可以调用的到,使用方法如下:
+   
+   ```
+   
+   this.project.subprojects { sub ->
+   
+       if(sub.path.endsWith("test")){
+           sub.afterEvaluate {
+               println "Evaluate before of "+sub.path
+           }
+       }
+   }
+     
+   ```
+
+这是比较简单的写法,通过遍历子工程并对其设置添加afterEvaluate回调,需要注意的是afterEvaluate的Closure方式其实是有传递一个参数的,只是我把他省略了，其实也可以加上，
+也可以对上面的方法做些调用,使用如下写法实现调用(subprojects和allprojects均可,看个人习惯,就不一一列出)：
+
+  ```
+  
+this.project.getSubprojects().each { sub ->
+
+    if(sub.path.endsWith("test")){
+        sub.afterEvaluate(new Action<Project>() {
+            @Override
+            void execute(Project project) {
+                println "Evaluate before of "+sub.path
+            }
+        })
+
+    }
+}
+
+//或者如下方式
+
+this.project.subprojects{ sub ->
+    if(sub.path.endsWith("test")){
+        sub.afterEvaluate { p ->
+            println "subprojects getAt Evaluate before of "+p.path
+
+        }
+
+    }
+}
+
+  ```
+
+
+
+ - afterEvaluate
+  afterEvaluate是一般比较常见的一个配置参数的回调方式,只要project配置成功均会调用,参数类型以及写法与afterEvaluate相同,示例如下所示:
+  
+  ```
+  this.project.afterEvaluate{
+      println "this.project.afterEvaluate"
+      //这里可以添加一些版本控制信息
+  }
+  ```
+
+
+ 2) gradle回调
+   可以通过project获取当前的gradle对象,gradle设置的回调监控的是所有的project实现.方式可以是通过gradle配置回调代码块,或者也可以通过添加监听接口方式获取回调监听.
+   - 通过gradle直接添加回调,代码如下:
+   
+   ```
+   
+ gradle.afterProject {project,projectState ->
+     if(projectState.failure){
+         println "Evaluation afterProject of $project FAILED"
+     } else {
+         println "Evaluation afterProject of $project succeeded"
+     }
+ }
+
+
+gradle.beforeProject { project ->
+    println "Evaluation before of $project"
+
+}
+   ```
+ 
+  需要注意,两种方法的传入参数有差异,afterProject在配置参数失败后会传入两个参数,后者显示失败信息.
+  
+  - 通过gradle 设置接口监听添加回调
+    直接通过这是对工程的监听回调接口获取回调.同上，作用的对象均是所有的project实现,代码格式如下所示:
+    
+    ```
+       gradle.addProjectEvaluationListener(new ProjectEvaluationListener() {
+           @Override
+           void beforeEvaluate(Project project) {
+               println " add project evaluation lister beforeEvaluate,project path is: $project"
+           }
+       
+           @Override
+           void afterEvaluate(Project project, ProjectState state) {
+               println " add project evaluation lister afterProject,project path is: $project"
+           }
+       }
+
+    ```
+
+
+   如上通过gradle设置监听的若需要指定特定对象操作的话,需要自己添加过滤规则.本篇结束,未完待续......
