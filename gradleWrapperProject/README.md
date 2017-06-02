@@ -1,4 +1,7 @@
-## 说明
+## 配置Gradle Wrapper配置环境
+
+
+### 说明
 
 本工程是为了讲解gradle wrapper特性,使得gradle项目无需依赖系统gradle环境就可允许的功能
 

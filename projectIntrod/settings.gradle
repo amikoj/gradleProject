@@ -1,11 +1,10 @@
 //settings.gradle本身实现了一个{org.gradle.api.initialization.Settings}接口
 
 /**
- * include 是Settings中一个设置工程的方法,格式位 include ':name'注意这个只是project的名字并不一定位project
+ * include 是Settings中一个设置工程的方法,格式为 include ':name'注意这个只是project的名字并不一定位project
  * 的路径
  */
 include ':moudle1',':test'
-
 
 //设置如上的工程的文件路径
 project(':test').projectDir=new File('module2')
