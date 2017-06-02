@@ -16,12 +16,12 @@ project是gradle配置中的一个核心API接口库.他提供包括但不仅包
 
 
 ### 示例介绍
-+ [Project配置状态监听](projectStateDemo)
-+ [Project构建脚本配置](projectBuildScriptDemo)
-+ [Project依赖管理配置](projectRelyDemo)
-+ [Project配置Ant](projectAntDemo)
-+ [Project多工程管理](../SimpleMultiProject)
-+ [Project配置artifacts](projectArtifactsDemo)
++ [Project配置状态监听](../../tree/master/projectIntrod/projectStateDemo)
++ [Project构建脚本配置](../../tree/master/projectIntrod/projectBuildScriptDemo)
++ [Project依赖管理配置](../../tree/master/projectIntrod/projectRelyDemo)
++ [Project配置Ant](../../tree/master/projectIntrod/projectAntDemo)
++ [Project多工程管理](../../tree/master/SimpleMultiProject)
++ [Project配置artifacts](../../tree/master/projectIntrod/projectArtifactsDemo)
 
 
 

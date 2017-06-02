@@ -2,7 +2,7 @@
 
 本项目为个人学习gradle构建脚本记录使用。
 
-+ [创建一个简单的多工程Gradle项目](tree/master/SimpleMultiProject)
-+ [配置Gradle Wrapper配置环境](tree/master/gradleWrapperProject)
-+ [Gradle脚本配置介绍之Project](tree/master/projectIntrod)
-+ [Gradle脚本配置介绍之Task](tree/master/projectTask)
++ [创建一个简单的多工程Gradle项目](../../tree/master/SimpleMultiProject)
++ [配置Gradle Wrapper配置环境](../../tree/master/gradleWrapperProject)
++ [Gradle脚本配置介绍之Project](../../tree/master/projectIntrod)
++ [Gradle脚本配置介绍之Task](../../tree/master/projectTask)
