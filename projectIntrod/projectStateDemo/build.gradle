@@ -1,0 +1,32 @@
+task versionControl << {
+    println "release success,and version is ${version}"
+}
+
+
+task debug(dependsOn:versionControl) << {
+    print "current version is debug."
+}
+
+
+task release(dependsOn:versionControl) << {
+    print "current version is release."
+}
+
+
+this.afterEvaluate(new Action<Project>() {
+    @Override
+    void execute(Project project) {
+        println "project configuration over."
+        project.gradle.taskGraph.whenReady {  taskGraph ->
+            println "this is taskGraph whenReady."
+            if (taskGraph.hasTask(debug)) {
+                println "this is a debug version"
+                project.version = "debug"
+            } else if (taskGraph.hasTask(release)) {
+                println "this is a release version"
+                project.version = "release"
+            }
+
+        }
+    }
+})
