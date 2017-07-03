@@ -1,2 +1,1 @@
-include ':gradleWrapperProject',':projectIntrod','SimpleMultiProject'
-
+include ':gradleWrapperProject',':projectIntrod','SimpleMultiProject','gradlebasisProject'

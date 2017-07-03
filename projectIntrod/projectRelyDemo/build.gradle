@@ -1,5 +1,69 @@
-
+//依赖配置
 task A << {
-
-    println "this is task A"
+    print "this is task A"
 }
+
+A.dependsOn('D')
+
+task B(dependsOn: [A,'C']) <<{
+    print "this is task B"
+}
+
+task C << {
+    print "this is task C"
+}
+
+
+task D << {
+    print "this is task D"
+}
+
+D.dependsOn(C)
+
+
+
+
+
+
+
+
+//库依赖
+project.repositories{
+    mavenCentral()
+}
+project.dependencies{
+    compile 'com.google.android.gms:play-services-base:6.5.87'
+
+}
+
+
+apply('java')
+
+
+//buildscript
+
+project.buildscript{
+
+    repositories{
+
+
+
+    }
+
+
+    dependencies{
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+

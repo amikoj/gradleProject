@@ -1,0 +1,9 @@
+
+
+task sayHello << {
+  println "Hello World!"
+}
+
+project.afterEvaluate {
+    println "config project parameters over."
+}
